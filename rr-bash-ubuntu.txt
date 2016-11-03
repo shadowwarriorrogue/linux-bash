@@ -1,0 +1,64 @@
+p=()
+l=()
+q=()
+x=()
+k=0
+h=0
+y=0
+echo "Number of process"
+read n
+.
+.
+.
+echo "Time quantam"
+read t
+.
+.
+.
+echo "Burst time"
+for((i=0;i<$n;i++))
+do
+echo "process $i"
+read p[$i]
+done
+.
+.
+.
+for((i=0;i<$n;i++))
+do
+l[$i]=0
+q[$i]=${p[$i]}
+done
+while [[ $k<$n ]]; do
+for((i=0;i<$n;i++))
+do
+if((p[$i]>0)); then
+x[y]=$i
+y=$((y+=1))
+if((p[$i]>$t)); then
+h=$((h+=t))
+p[$i]=$((p[$i]-t))
+else
+l[$i]=$((h+p[$i]))
+h=${l[$i]}
+p[$i]=0
+fi
+else
+k=$((k+=1))
+fi
+done
+done
+for((i=0;i<$n;i++))
+do
+s[$i]=$((l[$i]-q[$i]))
+done
+echo "execution procedure"
+for((i=0;i<$y;i++))
+do
+echo "p ${x[i]}"
+done
+echo "Process no  Burst Time  Turnaround time    Waiting Time"
+for((i=0;i<$n;i++))
+do
+echo "P $i       ${q[$i]}       ${l[$i]}        ${s[$i]}"
+done

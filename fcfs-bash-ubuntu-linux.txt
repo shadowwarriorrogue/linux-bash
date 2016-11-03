@@ -1,0 +1,41 @@
+burst=()
+wait=()
+name=()
+turn=()
+echo "Enter the number of process"
+read num
+.
+.
+.
+echo "Enter Process name and burst time serially"
+for((i=1;i<=num;i++))
+do
+echo "Name"
+read name[$i]
+echo "Burst for ${name[i]}:"
+read burst[$i]
+done
+.
+.
+.
+wait[0]="Waiting Time"
+burst[0]="Burst Time"
+name[0]="Process Name"
+turn[0]="Turnaround Time"
+wait[1]=0
+for((i=2;i<=num;i++))
+do
+wait[$i]=$((wait[$i-1]+burst[$i-1]))
+done
+for((i=1;i<=num;i++))
+do
+turn[$i]=$((wait[$i]+burst[$i]))
+done
+for((i=0;i<=num;i++))
+do
+if((i<1));then
+echo "${name[$i]}    ${burst[$i]}   ${wait[$i]}   ${turn[$i]}"
+else
+echo "      ${name[$i]}             ${burst[$i]}             ${wait[$i]}             ${turn[$i]}"
+fi
+done
